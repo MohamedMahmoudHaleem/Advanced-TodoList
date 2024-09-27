@@ -1,4 +1,5 @@
 import TodoCard from "./TodoCard.jsx"
+import {array, func} from "prop-types";
 
 export default function TodoList({
     todos,
@@ -30,4 +31,11 @@ export default function TodoList({
             </ul>
         </>
     )
+}
+TodoList.displayName = "TodoList"
+TodoList.propTypes = {
+    todos: array.isRequired,
+    setTodos: func.isRequired,
+    handleDelete: func.isRequired,
+    handleEdit: func.isRequired,
 }
