@@ -1,27 +1,35 @@
-import { useState } from "react";
+import { array, func, string } from "prop-types"
 
-export default function TodoInput({ todos, setTodos, setflag ,task,setTask }) {
-  
+export default function TodoInput({ todos, setTodos, todo, setTodo }) {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const value = e.currentTarget.elements.newTodo.value.trim()
+        if (!value) {
+            return
+        }
 
-  function handleTodos() {
-    if (!task) return;
-    setTodos([...todos, task]);
-    setTask("");
-    setflag(true);
-  }
-  function handleTodoEnter(e) {
-    e.key === "Enter" ? handleTodos() : "";
-  }
-  console.log(task);
-  return (
-    <header>
-      <input
-        placeholder="Enter todo..."
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        onKeyDown={(e) => handleTodoEnter(e)}
-      />
-      <button onClick={handleTodos}>Add</button>
-    </header>
-  );
+        setTodos([...todos, value])
+        setTodo("")
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
+                id="newTodo"
+                type="text"
+                placeholder="Enter todo..."
+                value={todo}
+                onChange={(e) => setTodo(e.target.value)}
+            />
+
+            <button type="submit">Add</button>
+        </form>
+    )
+}
+TodoInput.displayName = "TodoInput"
+TodoInput.propTypes = {
+    todos: array.isRequired,
+    setTodos: func.isRequired,
+    todo: string.isRequired,
+    setTodo: func.isRequired,
 }
