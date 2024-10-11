@@ -7,7 +7,7 @@ export default function TodoInput({ todos, setTodos, todo, setTodo }) {
         if (!value) {
             return
         }
-
+        console.log(value)
         setTodos([...todos, value])
         setTodo("")
     }
